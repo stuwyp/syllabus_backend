@@ -1,4 +1,6 @@
 # coding=utf-8
+import datetime
+
 from flask_restful import marshal
 from sqlalchemy import func
 
@@ -14,15 +16,21 @@ def anonymous_query(arg_dict):
     topic_id = arg_dict['topic_id'] or -1
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
+    latest_days = arg_dict['latest_days'] or 3
+    days_ago = (datetime.datetime.now() - datetime.timedelta(days=latest_days))
+    # mode = 1 : 按时间排序（降序）
+    # mode = 2 : 按评论数排序（降序）
+    # mode = 3 : 按点赞数排序（降序）
     if mode == 1:
         if topic_id == -1:
             post_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3).order_by(Post.post_time.desc())
         else:
-            post_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3, Post.topic_id == topic_id).order_by(
+            post_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3,
+                                              Post.topic_id == topic_id).order_by(
                 Post.post_time.desc())
         post_sort_list = post_sort_obj.paginate(page_index, page_size, False)
 
-    # mode = 2 : 按评论数排序（降序）
+
     elif mode == 2:
         # Important
         # with_entities(XXX) 代替 db.session.query(XXX)
@@ -32,14 +40,15 @@ def anonymous_query(arg_dict):
         # outerjoin 并集 （不能用join 交集）
         if topic_id == -1:
             post_sort_obj = Post.query.with_entities(Post).filter(Post.visibility == VISIBILITY_VISIBLE).filter(
-                Post.post_type == 3).outerjoin(comment_sub).order_by(comment_sub.c.count.desc())
+                Post.post_type == 3).outerjoin(comment_sub).filter(
+                Post.post_time > days_ago).order_by(comment_sub.c.count.desc())
         else:
             post_sort_obj = Post.query.with_entities(Post).filter(Post.visibility == VISIBILITY_VISIBLE).filter(
-                Post.post_type == 3).filter(Post.topic_id == topic_id).outerjoin(comment_sub).order_by(
+                Post.post_type == 3).filter(Post.topic_id == topic_id).outerjoin(comment_sub).filter(
+                Post.post_time > days_ago).order_by(
                 comment_sub.c.count.desc())
         post_sort_list = post_sort_obj.paginate(page_index, page_size, False)
 
-    # mode = 3 : 按点赞数排序（降序）
     elif mode == 3:
         thumb_sub = ThumbUp.query.with_entities(ThumbUp.post_id, func.count(ThumbUp.post_id).label('count')).group_by(
             ThumbUp.post_id).subquery()
@@ -47,10 +56,12 @@ def anonymous_query(arg_dict):
         if topic_id == -1:
 
             post_sort_obj = Post.query.with_entities(Post).filter(Post.visibility == VISIBILITY_VISIBLE).filter(
-                Post.post_type == 3).outerjoin(thumb_sub).order_by(thumb_sub.c.count.desc())
+                Post.post_type == 3).outerjoin(thumb_sub).filter(
+                Post.post_time > days_ago).order_by(thumb_sub.c.count.desc())
         else:
             post_sort_obj = Post.query.with_entities(Post).filter(Post.visibility == VISIBILITY_VISIBLE).filter(
-                Post.post_type == 3).filter(Post.topic_id == topic_id).outerjoin(thumb_sub).order_by(
+                Post.post_type == 3).filter(Post.topic_id == topic_id).outerjoin(thumb_sub).filter(
+                Post.post_time > days_ago).order_by(
                 thumb_sub.c.count.desc())
         post_sort_list = post_sort_obj.paginate(page_index, page_size, False)
     else:
@@ -71,9 +82,11 @@ def personal_anonymous_query(arg_dict):
     page_size = arg_dict['page_size'] or 10
 
     if topic_id == -1:
-        personal_anonymous_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3, Post.real_uid == uid).order_by(Post.post_time.desc())
+        personal_anonymous_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3,
+                                                        Post.real_uid == uid).order_by(Post.post_time.desc())
     else:
-        personal_anonymous_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3, Post.real_uid == uid, Post.topic_id == topic_id).order_by(Post.post_time.desc())
+        personal_anonymous_sort_obj = Post.query.filter(Post.visibility == 1, Post.post_type == 3, Post.real_uid == uid,
+                                                        Post.topic_id == topic_id).order_by(Post.post_time.desc())
 
     personal_anonymous_sort_list = personal_anonymous_sort_obj.paginate(page_index, page_size, False)
 

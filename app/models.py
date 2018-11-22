@@ -729,6 +729,8 @@ class AverageEvaluation(db.Model):
     # 汇总标签
     ave_tags = db.Column(db.String(40))
 
+    years_semester = db.Column(db.String(30), nullable=False)
+
     def __init__(self):
         pass
 
@@ -737,7 +739,8 @@ class AverageEvaluation(db.Model):
             'id': self.id,
             'teacher_course': self.teacher_course,
             'ave_score': self.ave_score,
-            'ave_tags': self.ave_tags
+            'ave_tags': self.ave_tags,
+            'years_semester': self.years_semester
         }
 
     def to_json(self, name=None):

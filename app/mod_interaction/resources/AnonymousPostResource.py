@@ -67,28 +67,25 @@ class AnonymousResource(Resource):
 
     def get(self):
 
-        self.get_parser.add_argument("uid", type=int, required=True, location="args")
-        self.get_parser.add_argument("token", required=True, location="args")
         self.get_parser.add_argument("mode", type=int, location="args")
+        self.get_parser.add_argument("latest_days", type=int, location="args")
         self.get_parser.add_argument("topic_id", type=int, location="args")
         # 用于分页
         self.get_parser.add_argument("page_index", type=int, location="args")
         # 用于分页
         self.get_parser.add_argument("page_size", type=int, location="args")
         args = self.get_parser.parse_args()
-        # 检查token
-        if general_operation.check_token(args):
-            # print(args)
-            try:
-                ret = anonymous_query(args)
-                if ret[0]:
-                    return ret[1],200
-                return {"error": ret[1]}, 404
-            except Exception as e:
-                print(repr(e))
-                return {"error": repr(e)}, 500
-        else:
-            return {"error": "unauthorized"}, 401
+
+        # print(args)
+        try:
+            ret = anonymous_query(args)
+            if ret[0]:
+                return ret[1],200
+            return {"error": ret[1]}, 404
+        except Exception as e:
+            print(repr(e))
+            return {"error": repr(e)}, 500
+
 
 
 class PersonalAnonymousResource(Resource):

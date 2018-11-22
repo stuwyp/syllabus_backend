@@ -10,10 +10,11 @@ def post_query_sort(arg_dict):
     # print(arg_dict)
     mode = arg_dict['mode'] or 1
     topic_id = arg_dict['topic_id'] or -1
+    latest_days = arg_dict['latest_days'] or 3
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
 
-    page_obj = get_post_by_page(page_index, page_size, mode,topic_id)
+    page_obj = get_post_by_page(page_index, page_size, mode,topic_id,latest_days)
     return page_obj
 
 
@@ -36,6 +37,7 @@ class PostSortResource(Resource):
     def get(self):
 
         self.get_parser.add_argument("mode", type=int, location="args")
+        self.get_parser.add_argument("latest_days", type=int, location="args")
         # 用于分页
         self.get_parser.add_argument("page_index", type=int, location="args")
         # 用于分页

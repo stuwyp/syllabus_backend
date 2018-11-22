@@ -20,7 +20,7 @@ class OAResource(Resource):
     def post(self):
         args = post_parser.parse_args()
         try:
-            resp = requests.post("http://127.0.0.1:8080/oa", data=args)
+            resp = requests.post("http://127.0.0.1:8080/stu_oa", data=args)
             return resp.json()
         except requests.exceptions.ConnectionError:
             return {"error": "connection refused"}, 400

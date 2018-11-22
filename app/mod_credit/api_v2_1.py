@@ -1,7 +1,6 @@
 # coding=utf-8
 __author__ = 'smallfly'
 
-
 # 用于和内网的学分制系统交互的模块
 
 from flask import Blueprint, make_response
@@ -18,6 +17,7 @@ credit_blueprint2_1 = Blueprint("credit_blueprint2", __name__, url_prefix="/cred
 
 api_v2_1 = Api(credit_blueprint2_1, prefix="/api/v2.1")
 
+
 # http://flask-restful-cn.readthedocs.io/en/0.3.5/extending.html
 @api_v2_1.representation("application/json")
 def output_json(data, code, headers=None):
@@ -32,13 +32,14 @@ def output_json(data, code, headers=None):
         response_data.data = {}
     else:
         response_data.data = data
-        if 200 < code or code > 200:
+        if code < 200 or code > 300:
             response_data.message = 'fail'
         else:
             response_data.message = 'success'
     resp = make_response(response_data.to_json(), 200)
     resp.headers.extend(headers or {})
     return resp
+
 
 api_v2_1.add_resource(ClassMember, "/member", "/member/", endpoint="member")
 api_v2_1.add_resource(SyllabusResource, "/syllabus", "/syllabus/", endpoint="syllabus")
