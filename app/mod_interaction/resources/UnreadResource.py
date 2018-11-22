@@ -1,10 +1,10 @@
 # coding=utf-8
 __author__ = 'smallfly'
 
-from flask_restful import Resource, reqparse, fields, marshal
+from flask_restful import Resource, reqparse, marshal
 from flask import jsonify
 from app.mod_interaction.database_operations import common
-from app.mod_interaction.models import User, UnRead, Post
+from app.models import User, UnRead, Post
 from app.mod_interaction.resources import PostResource
 from app import db
 
@@ -22,8 +22,8 @@ class UnreadResource(Resource):
         """
         测试:
         参数: uid, type(可选, 0(默认值) - 获取post_id; 1 - 获取对应的 post, 返回值与 get post 返回值一致)
-        curl "localhost:8080/interaction/api/v2/unread?uid=1&type=0"    # type 默认为 0
-        curl "localhost:8080/interaction/api/v2/unread?uid=1&type=1"
+        curl "127.0.0.1:8080/interaction/api/v2/unread?uid=1&type=0"    # type 默认为 0
+        curl "127.0.0.1:8080/interaction/api/v2/unread?uid=1&type=1"
         :return:
         可能返回值:
         404, 表示没有该用户, 或者该用户并没有未读信息
@@ -60,7 +60,7 @@ class UnreadResource(Resource):
         """
         测试:
         参数: uid, pid(post_id, 报头中貌似使用下划线会有一些问题, 所以改为pid), token
-        curl "localhost:8080/interaction/api/v2/unread" -X DELETE -H "token: 000000" -H "uid: 2" -H "pid: 2"
+        curl "127.0.0.1:8080/interaction/api/v2/unread" -X DELETE -H "token: 000000" -H "uid: 2" -H "pid: 2"
         # 注意这里是pid, header 中貌似使用 _ 会有一些遗留问题
         http://stackoverflow.com/questions/22856136/why-underscores-are-forbidden-in-http-header-names
         :return:

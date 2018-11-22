@@ -17,3 +17,12 @@ config.conf
 
 # testing stuff
 connect_to_db.sh
+
+# ini
+syllabus.ini
+uwsgi.ini
+uwsgiconfig.ini
+
+/app/mod_interaction/templates/
+/app/mod_interaction/views.py
+/app/views.py

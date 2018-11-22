@@ -4,7 +4,7 @@ __author__ = 'smallfly'
 # 对user model进行各类操作
 
 from app.mod_interaction.database_operations import common
-from app.mod_interaction.models import User
+from app.models import User
 from app import db
 
 def get_user_by_id(id):

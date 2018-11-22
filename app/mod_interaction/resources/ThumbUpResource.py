@@ -3,7 +3,7 @@ __author__ = 'smallfly'
 
 from flask_restful import reqparse, fields
 from app.mod_interaction.resources.GenericSingleResource import GenericSingleResource
-from app.mod_interaction.models import ThumbUp
+from app.models import ThumbUp
 from app.mod_interaction.database_operations import thumb_up_operation, common
 
 
@@ -41,7 +41,7 @@ SINGLE_THUMB_UP_INITIAL_KWARGS = {
         "put"
     ],
     GenericSingleResource.EXTRA_CALLBACKS_FOR_METHODS_DICT:{
-        "post": thumb_up_operation.check_multiple_likes
+        "post": thumb_up_operation.check_post_multiple_likes
     },
     GenericSingleResource.TOKEN_CHECK_FOR_METHODS_DICT:{
         "post": common.check_token,

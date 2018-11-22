@@ -4,10 +4,9 @@ __author__ = 'smallfly'
 from flask_restful import Resource, fields, marshal
 from flask_restful.reqparse import RequestParser
 from app.mod_interaction.database_operations import common
-from app.mod_interaction import models
 from app.mod_interaction.resources.helpers import timestamp_to_string
 from app.mod_interaction.resources import PassengerResource
-from app import db
+from app import db, models
 
 import time
 
@@ -132,7 +131,7 @@ class CarpoolResource(Resource):
                                          uid=args["uid"],
                                          carpool_id=carpool.id,
                                          contact=args["contact"]
-            )
+                                         )
             common.add_to_db(db, passenger)
             return {"id": carpool.id}, 200
         else:

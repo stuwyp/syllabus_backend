@@ -3,8 +3,8 @@ __author__ = 'smallfly'
 
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/#querying-records
 
-from app.mod_interaction.models import User, VISIBILITY_VISIBLE, VISIBILITY_INVISIBLE, Comment
-from app.mod_interaction.database_operations.comment_operation import new_unread
+from app.models import User, VISIBILITY_VISIBLE, VISIBILITY_INVISIBLE, Comment
+from app.mod_interaction.database_operations.unread_comment_operation import new_unread
 # from config import config
 
 # 一些错误常量
@@ -51,7 +51,7 @@ def query_single_by_id(model, id_):
     # 参考文档
     # return model.query.get(id_)
 
-def query_single_by_filed(model, field, value):
+def query_single_by_field(model, field, value):
     if not hasattr(model, field):
         return None
     kwargs = {
@@ -125,7 +125,7 @@ def query_one_to_many(model, **kwargs):
     count = kwargs.pop(QUERY_ATTR_COUNT) or QUERY_RESULT_COUNT_DEFAULT   # 返回的数量
     order_by = kwargs.pop(QUERY_ATTR_ORDER_BY) or  QUERY_ORDER_BY_DEFAULT   # 按照什么排序
     before_id = kwargs.pop(QUERY_ATTR_BEFORE_ID) or QUERY_BEFORE_ID_DEFAULT  # 偏移量
-    filed = kwargs.pop(QUERY_ATTR_FILTER_FIELD) or None
+    field = kwargs.pop(QUERY_ATTR_FILTER_FIELD) or None
     value = kwargs.pop(QUERY_ATTR_FILTER_VALUE) or None
 
     # 如果可以转换成数字就转换为数字
@@ -137,23 +137,23 @@ def query_one_to_many(model, **kwargs):
     if tmp != False:
         before_id = tmp
 
-    if filed is None:
+    if field is None:
         return False
 
-    if not hasattr(model, filed) or not hasattr(model, order_by):
-        # print("model has not ", filed)
+    if not hasattr(model, field) or not hasattr(model, order_by):
+        # print("model has not ", field)
         return False
 
-    # print(model.__tablename__, " has ", filed)
+    # print(model.__tablename__, " has ", field)
 
     # print(before_id)
 
     if sorting == QUERY_SORT_TYPE_DESC:
         return \
-            model.query.filter(getattr(model, filed) == value).filter(model.id < before_id).filter_by(visibility=VISIBILITY_VISIBLE).order_by(getattr(model, order_by).desc()).limit(count).all()
+            model.query.filter(getattr(model, field) == value).filter(model.id < before_id).filter_by(visibility=VISIBILITY_VISIBLE).order_by(getattr(model, order_by).desc()).limit(count).all()
     else:
         return \
-            model.query.filter(getattr(model, filed) == value).filter(model.id < before_id).filter_by(visibility=VISIBILITY_VISIBLE).order_by(getattr(model, order_by).asc()).limit(count).all()
+            model.query.filter(getattr(model, field) == value).filter(model.id < before_id).filter_by(visibility=VISIBILITY_VISIBLE).order_by(getattr(model, order_by).asc()).limit(count).all()
 
 
 # def query(model, **kwargs):
@@ -227,6 +227,7 @@ def new_record(db, model, **kwargs):
     # print(kwargs)
     thing = model(**kwargs)
     result = add_to_db(db, thing)
+
     if result == True:
         if issubclass(model, Comment):
             print("generating unread messages")

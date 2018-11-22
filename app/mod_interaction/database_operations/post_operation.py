@@ -3,7 +3,7 @@ __author__ = 'smallfly'
 
 from app.mod_interaction.database_operations import common
 from app.mod_interaction.database_operations import user_operation
-from app.mod_interaction.models import Post
+from app.models import Post
 from app import db
 
 def get_post_by_id(id):

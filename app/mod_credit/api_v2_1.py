@@ -1,8 +1,6 @@
 # coding=utf-8
 __author__ = 'smallfly'
 
-# coding=utf-8
-__author__ = 'smallfly'
 
 # 用于和内网的学分制系统交互的模块
 
@@ -45,7 +43,7 @@ def output_json(data, code, headers=None):
 api_v2_1.add_resource(ClassMember, "/member", "/member/", endpoint="member")
 api_v2_1.add_resource(SyllabusResource, "/syllabus", "/syllabus/", endpoint="syllabus")
 
-# curl localhost:8080/credit/api/v2/exam -X POST -d "username=14xfdeng&password=*****&years=2015-2016&semester=1"
+# curl 127.0.0.1:8080/credit/api/v2/exam -X POST -d "username=14xfdeng&password=*****&years=2015-2016&semester=1"
 api_v2_1.add_resource(ExamResource, "/exam", "/exam/", endpoint="exam")
 
 api_v2_1.add_resource(GradeResource, "/grade", "/grade/", endpoint="grade")

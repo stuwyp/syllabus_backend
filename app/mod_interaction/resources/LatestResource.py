@@ -4,7 +4,7 @@ __author__ = 'smallfly'
 from flask_restful import Resource, reqparse
 from flask import jsonify
 from app.mod_interaction.database_operations import common
-from app.mod_interaction.models import Post, User
+from app.models import Post, User
 
 class LatestResource(Resource):
 
@@ -14,7 +14,7 @@ class LatestResource(Resource):
 
     def get(self):
         """
-        curl localhost:8080/interaction/api/v2/latest
+        curl 127.0.0.1:8080/interaction/api/v2/latest
         可选参数, type, 指定查询的表,
         MODEL_TYPE_USER = 0, 用户
         MODEL_TYPE_POST = 1, post表

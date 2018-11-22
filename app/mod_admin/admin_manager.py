@@ -3,8 +3,8 @@ __author__ = 'smallfly'
 
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from app import db
-from app.mod_interaction import models
+from app import db, models
+
 
 class UserModelView(ModelView):
 

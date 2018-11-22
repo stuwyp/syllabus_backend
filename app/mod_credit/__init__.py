@@ -22,7 +22,7 @@ api = Api(credit_blueprint, prefix="/api/v2")
 api.add_resource(ClassMember, "/member", "/member/", endpoint="member")
 api.add_resource(SyllabusResource, "/syllabus", "/syllabus/", endpoint="syllabus")
 
-# curl localhost:8080/credit/api/v2/exam -X POST -d "username=14xfdeng&password=*****&years=2015-2016&semester=1"
+# curl 127.0.0.1:8080/credit/api/v2/exam -X POST -d "username=14xfdeng&password=*****&years=2015-2016&semester=1"
 api.add_resource(ExamResource, "/exam", "/exam/", endpoint="exam")
 
 api.add_resource(GradeResource, "/grade", "/grade/", endpoint="grade")

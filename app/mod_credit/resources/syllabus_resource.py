@@ -7,7 +7,7 @@ from flask_restful import Resource, reqparse
 from app.mod_interaction.database_operations import common
 from app import db
 
-from app.mod_interaction.models import User
+from app.models import User
 import requests
 import requests.exceptions
 
@@ -25,7 +25,7 @@ def new_or_update_user(account, token):
     :param token:
     :return:
     """
-    user = common.query_single_by_filed(User, "account", account)
+    user = common.query_single_by_field(User, "account", account)
     if user is None:
         # 新用户
         user = User(account=account, token=token)
@@ -46,7 +46,7 @@ def new_or_update_user(account, token):
 
 class SyllabusResource(Resource):
 
-    SYLLABUS_API_URL = "http://127.0.0.1:8084/syllabus"
+    SYLLABUS_API_URL = "http://127.0.0.1:8080/syllabus"
 
     def get(self):
         return {"error": "method not allowed"}, 405

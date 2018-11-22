@@ -2,7 +2,7 @@
 __author__ = 'smallfly'
 
 from flask_restful import fields, reqparse, Resource, marshal
-from app.mod_interaction.models import User
+from app.models import User
 from app.mod_interaction.database_operations import common
 from app.mod_interaction.resources.GenericSingleResource import GenericSingleResource
 from app.mod_interaction.resources.GenericMultipleResource import  GenericMultipleResource
@@ -96,14 +96,14 @@ class CompatibleUserResource(Resource):
             return {"error": "name required in the query parameter"}, 400
         # print(name)
         # input()
-        user = common.query_single_by_filed(User, "account", account)
+        user = common.query_single_by_field(User, "account", account)
         if user is None:
             return {"error": "no user's account is {}".format(account)}, 404
         return marshal(user, SINGLE_USER_STRUCTURE)
 
 # class UserResource(GenericResource):
 #
-#     # curl --header "Content-type: application/json" localhost:8080/interaction/api/v2/user -X PUT -d '{"id": 1, "birthday": "819648000", "nickname": "xiaofud", "gender": 1, "profile": "hello world"}'
+#     # curl --header "Content-type: application/json" 127.0.0.1:8080/interaction/api/v2/user -X PUT -d '{"id": 1, "birthday": "819648000", "nickname": "xiaofud", "gender": 1, "profile": "hello world"}'
 #     # date -d "1995-12-23" "+%s"    获取时间戳
 #     def put(self):
 #         args = put_parser.parse_args()

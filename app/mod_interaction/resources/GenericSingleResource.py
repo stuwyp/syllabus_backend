@@ -35,7 +35,6 @@ class GenericSingleResource(Resource):
     # 额外的处理
     EXTRA_CALLBACKS_FOR_METHODS_DICT = "EXTRA_CALLBACKS_FOR_METHODS_DICT"
 
-
     # 检测token
     TOKEN_CHECK_FOR_METHODS_DICT = "TOKEN_CHECK_FOR_METHODS_DICT"
 
@@ -44,8 +43,6 @@ class GenericSingleResource(Resource):
     # def get_resource(model, id, **kwargs):
     #     pass
     RESOURCE_GETTER = "RESOURCE_GETTER"
-
-
 
     def __init__(self, **kwargs):
         self.accepted_variable_dict = kwargs[GenericSingleResource.ACCEPTED_VARIABLE_DICT]
@@ -58,7 +55,6 @@ class GenericSingleResource(Resource):
         self.extra_callbacks = kwargs.pop(GenericSingleResource.EXTRA_CALLBACKS_FOR_METHODS_DICT, None)
         self.token_check_callbacks = kwargs.pop(GenericSingleResource.TOKEN_CHECK_FOR_METHODS_DICT, None)
         self.resource_getter = kwargs.pop(GenericSingleResource.RESOURCE_GETTER, None)
-
 
     def get(self, id=None):
 
@@ -81,11 +77,10 @@ class GenericSingleResource(Resource):
             # 看看是否需要检查token
             if self.token_check_callbacks is not None and "get" in self.token_check_callbacks:
                 if not self.token_check_callbacks["get"](args):
-                    return {"error": "unauthorized"}, 401 # Unauthorized
+                    return {"error": "unauthorized"}, 401  # Unauthorized
                 else:
                     # 到这里要去掉token, 因为不允许用户写入token
                     args.pop("token")
-
 
         thing = common.query_single_by_id(self.model, id)
         if thing is None:
@@ -98,11 +93,8 @@ class GenericSingleResource(Resource):
         if self.not_allowed_methods is not None and "post" in self.not_allowed_methods:
             return {"error": "method not allowed"}, 405
 
-
-
         if "post" in self.parsers:
             args = self.parsers["post"].parse_args()
-            # print(args)
             if "post" in self.accepted_variable_dict:
                 helpers.clean_arguments(args, self.accepted_variable_dict["post"])
             # 进行时间处理
@@ -117,10 +109,13 @@ class GenericSingleResource(Resource):
                 # print("checking token")
                 # print("input token", args["token"])
                 if not self.token_check_callbacks["post"](args):
-                    return {"error": "unauthorized"}, 401 # Unauthorized
+                    return {"error": "unauthorized"}, 401  # Unauthorized
 
             # 到这里要去掉token, 因为不允许用户写入token
             args.pop("token")
+            # 处理post的topic_id字段
+            if 'topic_id' in args and args['topic_id'] is None:
+                args['topic_id'] = 0
 
         # 调用回调方法
         if self.extra_callbacks is not None and "post" in self.extra_callbacks:
@@ -132,12 +127,11 @@ class GenericSingleResource(Resource):
             if ret_val != False:
                 return ret_val
 
-
         result = common.new_record(db, self.model, **args)
         if result != False:
             return {"id": result}, 201  # crated
         else:
-            return {"error": "failed"}, 500 # Internal Server Error
+            return {"error": "failed"}, 500  # Internal Server Error
 
     def put(self):
 
@@ -160,7 +154,7 @@ class GenericSingleResource(Resource):
                 # print("need to check token")
                 if not self.token_check_callbacks["put"](args):
                     # print(args["uid"], args["id"], args["token"])
-                    return {"error": "unauthorized"}, 401 # Unauthorized
+                    return {"error": "unauthorized"}, 401  # Unauthorized
 
             # 因为不允许更新id
             id = args.pop("id")
@@ -177,7 +171,7 @@ class GenericSingleResource(Resource):
             if result[1] == common.ERROR_NOT_FOUND:
                 return {"error": "{} not found".format(self.resource_name)}, 404
             elif result[1] == common.ERROR_COMMIT_FAILED:
-                return {"error": "failed"}, 500 # Internal Server Error
+                return {"error": "failed"}, 500  # Internal Server Error
             elif result[1] == common.ERROR_USER_ID_CONFLICT:
                 return {"error": "kidding me?"}, 401
 
@@ -203,7 +197,7 @@ class GenericSingleResource(Resource):
             # 看看是否需要检查token
             if self.token_check_callbacks is not None and "delete" in self.token_check_callbacks:
                 if not self.token_check_callbacks["delete"](args):
-                    return {"error": "unauthorized"}, 401 # Unauthorized
+                    return {"error": "unauthorized"}, 401  # Unauthorized
 
             result = common.delete_from_db(db, self.model, args["id"], args["uid"])
             if result == True:
@@ -212,7 +206,7 @@ class GenericSingleResource(Resource):
                 if result[1] == common.ERROR_NOT_FOUND:
                     return {"error": "{} not found".format(self.resource_name)}, 404
                 elif result[1] == common.ERROR_COMMIT_FAILED:
-                    return {"error": "failed"}, 500 # Internal Server Error
+                    return {"error": "failed"}, 500  # Internal Server Error
                 elif result[1] == common.ERROR_USER_ID_CONFLICT:
                     return {"error": "kidding me?"}, 403
         return {"error": "bad request"}, 400

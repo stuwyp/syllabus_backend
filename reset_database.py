@@ -1,7 +1,7 @@
 # coding=utf-8
 __author__ = 'smallfly'
 
-from app.mod_interaction.models import *
+from app.models import *
 # 建立一些测试用途的数据
 def generate_test_data():
     # 一些测试数据

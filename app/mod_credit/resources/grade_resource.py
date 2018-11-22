@@ -18,8 +18,9 @@ class GradeResource(Resource):
         # 日志
         print(args["username"], "queries grade")
         try:
-            resp = requests.post("http://127.0.0.1:8084/grade", data=args)
+            resp = requests.post("http://127.0.0.1:8080/grade", data=args)
             return resp.json()
+
         except requests.exceptions.ConnectionError:
             # resp.status_code = 400
             return {"error": "connection refused"}, 400

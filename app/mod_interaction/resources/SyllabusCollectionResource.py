@@ -4,8 +4,8 @@ __author__ = 'smallfly'
 from flask_restful import Resource
 from flask_restful.reqparse import RequestParser
 from app.mod_interaction.database_operations import common
-from app.mod_interaction import models
-from app import db
+from app import db, models
+
 
 def delete_record(db, record):
     try:
@@ -53,14 +53,14 @@ class SyllabusCollectionResource(Resource):
         self.GET_PARSER.add_argument("collectionID", required=True, location="headers")
 
         args = self.GET_PARSER.parse_args()
-        user = common.query_single_by_filed(models.User, "account", args["username"])
+        user = common.query_single_by_field(models.User, "account", args["username"])
         if user is None:
             return {"error": "user doesn't exist"}, 404
 
         if not check_token(user, args["token"]):
             return {"error": "token is wrong"}, 401
 
-        collector = common.query_single_by_filed(models.Collector, "collection_id", args["collectionID"])
+        collector = common.query_single_by_field(models.Collector, "collection_id", args["collectionID"])
         if collector is None:
             # 表明用户输入了错误的collection_id
             return {"error": "wrong collection_id"}, 404
@@ -97,14 +97,14 @@ class SyllabusCollectionResource(Resource):
         self.POST_PARSER.add_argument("syllabus", required=True, location="form")
 
         args = self.POST_PARSER.parse_args()
-        user = common.query_single_by_filed(models.User, "account", args["username"])
+        user = common.query_single_by_field(models.User, "account", args["username"])
         if user is None:
             return {"error": "user doesn't exist"}, 404
 
         if not check_token(user, args["token"]):
             return {"error": "token is wrong"}, 401
 
-        collector = common.query_single_by_filed(models.Collector, "collection_id", args["collection_id"])
+        collector = common.query_single_by_field(models.Collector, "collection_id", args["collection_id"])
         if collector is None:
             # 表明用户输入了错误的collection_id
             return {"error": "wrong collection_id"}, 404
@@ -137,7 +137,7 @@ class SyllabusCollectionResource(Resource):
 
         args = self.DELETE_PARSER.parse_args()
         # 检查token
-        user = common.query_single_by_filed(models.User, "account", args["username"])
+        user = common.query_single_by_field(models.User, "account", args["username"])
         if user is None:
             return {"error": "user doesn't exist"}, 404
 
@@ -155,7 +155,7 @@ class SyllabusCollectionResource(Resource):
             else:
                 return {"error": repr(status[1])}, 500
         else:
-            collector = common.query_single_by_filed(models.Collector, "collection_id", collection.collection_id)
+            collector = common.query_single_by_field(models.Collector, "collection_id", collection.collection_id)
             if collector is None:
                 return {"error": "collector not found"}, 404
             if collector.uid == user.id:

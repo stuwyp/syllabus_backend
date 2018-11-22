@@ -1,10 +1,9 @@
 # coding=utf-8
 __author__ = 'smallfly'
 
-from app import db
+from app import db, models
 from app.mod_interaction import PostResource
 from app.mod_interaction.database_operations import common
-from app.mod_interaction import models
 from app.mod_interaction.resources import helpers
 from flask_restful.reqparse import RequestParser
 from flask_restful import Resource, fields, marshal
@@ -140,7 +139,7 @@ class ActivityResource(Resource):
                     .paginate(page_index, page_size, False)
 
         activities = page_obj.items
-
+        # print([a.activity_start_time  for a in activities],"\n=============")
 
         return activities
 
@@ -171,7 +170,8 @@ class ActivityResource(Resource):
 
 
         # 检测是否有权限发布
-        super_users = models.User.query.with_entities(models.User.id).filter(models.User.level >= models.User.LEVEL_CAN_POST_ACTIVITY).all()
+        super_users = models.User.query.with_entities(models.User.id).filter(
+            models.User.level >= models.User.LEVEL_CAN_POST_ACTIVITY).all()
         super_ids = [user.id for user in super_users]
         if args["uid"] not in super_ids:
             return {"error": "HAVE NOT THE PRIORITY"}, 403  # 没有权限发布

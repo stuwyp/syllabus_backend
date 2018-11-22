@@ -6,18 +6,21 @@ from flask_restful import Resource, reqparse
 import requests
 import requests.exceptions
 
-parser = reqparse.RequestParser(trim=True)
+post_parser = reqparse.RequestParser(trim=True)
 
-parser.add_argument("username", required=True, location="form")
-parser.add_argument("token", required=True, location="form")
-parser.add_argument("pageindex", required=True, location="form")
+post_parser.add_argument("username", required=True, location="form")
+post_parser.add_argument("token", required=True, location="form")
+post_parser.add_argument("page_index", location="form")
+post_parser.add_argument("page_size", location="form")
+post_parser.add_argument("keyword", location="form")
+post_parser.add_argument("subcompany_id", location="form")
 
 class OAResource(Resource):
 
     def post(self):
-        args = parser.parse_args()
+        args = post_parser.parse_args()
         try:
-            resp = requests.post("http://127.0.0.1:8084/oa", data=args)
+            resp = requests.post("http://127.0.0.1:8080/oa", data=args)
             return resp.json()
         except requests.exceptions.ConnectionError:
             return {"error": "connection refused"}, 400
