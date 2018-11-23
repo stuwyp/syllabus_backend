@@ -85,7 +85,7 @@ def get_personal_eva_by_uid(uid, mode=1, page_index=1, page_size=10):
 def get_class_eva(teacher_id, course_id, class_id, mode=1, term=1, page_index=1, page_size=10):
     tc_id = get_tc_by_tid_cid(teacher_id, course_id).id
     # term = 1 ：课程班的本学期
-    # term = 0 ：所有学期
+    # term = -1 ：所有学期
     # mode = 1：查询同课程同老师的所有评价（有多个班），时间排序：降序
     # mode = 2：查询同课程同老师的所有评价（有多个班），分数排序：降序
     # mode = 3：查询同班课的所有评价，时间排序：降序
