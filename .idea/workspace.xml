@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5769cbb3-f56e-4b93-9c64-99151b21e0af" name="Default" comment="update post sort by latest days">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mod_extension/database_operations/eva_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/mod_extension/database_operations/eva_operation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mod_mystu/mystu.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/mod_mystu/mystu.py" afterDir="false" />
     </list>
     <list id="2470a4b1-30a0-4a53-adb5-f1d2a0701719" name="update post sort by latest days" comment="update post sort by latest days" />
     <ignored path="largeApp.iws" />
@@ -22,6 +22,7 @@
     <SUITE FILE_PATH="coverage/syllabus_backend$update_apk.coverage" NAME="update_apk Coverage Results" MODIFIED="1473518889151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/versions" />
     <SUITE FILE_PATH="coverage/largeApp$models.coverage" NAME="models Coverage Results" MODIFIED="1458455761578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/mod_interaction" />
     <SUITE FILE_PATH="coverage/syllabus_backend$hello_requests.coverage" NAME="hello_requests Coverage Results" MODIFIED="1458549401138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/use_requests" />
+    <SUITE FILE_PATH="coverage/syllabus_backend$mystu.coverage" NAME="mystu Coverage Results" MODIFIED="1543758380865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/mod_mystu" />
     <SUITE FILE_PATH="coverage/syllabus_backend$carpool_test.coverage" NAME="carpool_test Coverage Results" MODIFIED="1469161226285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_PostTest_test_delete_with_wrong_user.coverage" NAME="Unittest PostTest.test_delete_with_wrong_user Coverage Results" MODIFIED="1458566182495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$VoteTest.coverage" NAME="VoteTest Coverage Results" MODIFIED="1458658070200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
@@ -55,7 +56,7 @@
     <SUITE FILE_PATH="coverage/syllabus_backend$extract_flow_info.coverage" NAME="extract_flow_info Coverage Results" MODIFIED="1473420789682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/regular_expressions" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_PostTest_test_delete_without_token.coverage" NAME="Unittest PostTest.test_delete_without_token Coverage Results" MODIFIED="1458566187561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$wsgi.coverage" NAME="wsgi Coverage Results" MODIFIED="1467602513994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/syllabus_backend$run.coverage" NAME="run Coverage Results" MODIFIED="1542904368520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/syllabus_backend$run.coverage" NAME="run Coverage Results" MODIFIED="1543765724869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/syllabus_backend$CollectorResource.coverage" NAME="CollectorResource Coverage Results" MODIFIED="1474037831266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/mod_interaction/resources" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_PostTest_test_put_without_token.coverage" NAME="Unittest PostTest.test_put_without_token Coverage Results" MODIFIED="1458556883941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$test_anonymous.coverage" NAME="test_anonymous Coverage Results" MODIFIED="1499100398476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -84,6 +85,7 @@
     <SUITE FILE_PATH="coverage/syllabus_backend$reset_database.coverage" NAME="reset_database Coverage Results" MODIFIED="1459308788585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utility" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_CommentTest_test_get_comment.coverage" NAME="Unittest CommentTest.test_get_comment Coverage Results" MODIFIED="1458566768770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_PostTest_test_post_wrong_token.coverage" NAME="Unittest PostTest.test_post_wrong_token Coverage Results" MODIFIED="1458556000747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
+    <SUITE FILE_PATH="coverage/syllabus_backend$1.coverage" NAME="1 Coverage Results" MODIFIED="1543758371828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/mod_mystu" />
     <SUITE FILE_PATH="coverage/largeApp$config.coverage" NAME="config Coverage Results" MODIFIED="1458453155562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_UserTest_test_put_with_wrong_token.coverage" NAME="Unittest UserTest.test_put_with_wrong_token Coverage Results" MODIFIED="1458569872304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
     <SUITE FILE_PATH="coverage/syllabus_backend$Unittest_PostTest_test_post_without_token.coverage" NAME="Unittest PostTest.test_post_without_token Coverage Results" MODIFIED="1458556550753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testing/unittests" />
@@ -123,17 +125,23 @@
     <session id="-1633764289">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.32" value="1" />
+          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.45" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="MD" value="1" />
           <entry key="gitignore" value="3" />
-          <entry key="py" value="19" />
+          <entry key="py" value="22" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
@@ -141,20 +149,21 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="19" />
+          <entry key="Python" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="393" />
+          <entry key="dummy" value="4" />
+          <entry key="py" value="2052" />
           <entry key="txt" value="48" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="48" />
-          <entry key="Python" value="393" />
+          <entry key="PLAIN_TEXT" value="52" />
+          <entry key="Python" value="2052" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -166,18 +175,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/mod_extension/database_operations/eva_operation.py">
+        <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="86" selection-start-line="86" selection-end-line="91" selection-end-column="33" />
+            <state relative-caret-position="102">
+              <caret line="159" column="40" lean-forward="true" selection-start-line="159" selection-start-column="27" selection-end-line="159" selection-end-column="40" />
+              <folding>
+                <element signature="e#3583#4009#0" />
+                <element signature="e#5305#5823#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/mod_extension/resources/EvaResource.py">
+        <entry file="file://$PROJECT_DIR$/app/mod_mystu/mystu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-252" />
+            <state relative-caret-position="197">
+              <caret line="254" column="64" selection-start-line="254" selection-start-column="64" selection-end-line="254" selection-end-column="64" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1431#1574#0" />
+                <element signature="e#1619#1641#0" />
+                <element signature="e#1677#1696#0" />
+                <element signature="e#1775#2231#0" />
+                <element signature="e#2284#3261#0" />
+                <element signature="e#3310#3540#0" />
+                <element signature="e#3580#3603#0" />
+                <element signature="e#3671#4492#0" />
+                <element signature="e#4590#6998#0" />
+                <element signature="e#7758#8861#0" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -193,7 +221,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>common</find>
       <find>new</find>
       <find>post</find>
       <find>120</find>
@@ -204,7 +231,31 @@
       <find>200</find>
       <find>post_list</find>
       <find>marshal</find>
+      <find>assgin</find>
+      <find>pattern2</find>
+      <find>pattern3</find>
+      <find>pattern4</find>
+      <find>items</find>
+      <find>folderUrl</find>
+      <find>实验</find>
+      <find>lxml</find>
+      <find>etree</find>
+      <find>pattern</find>
+      <find>软</find>
+      <find>soup</find>
+      <find>wrong</find>
+      <find>'}</find>
+      <find>500</find>
+      <find>401</find>
+      <find>402</find>
+      <find>403</find>
+      <find>cookie</find>
+      <find>},</find>
     </findStrings>
+    <replaceStrings>
+      <replace>403</replace>
+      <replace>400</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -212,8 +263,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/testing/unittests/carpool_test.py" />
-        <option value="$PROJECT_DIR$/app/mod_interaction/resources/PassengerResource.py" />
         <option value="$PROJECT_DIR$/app/mod_interaction/resources/CarpoolResource.py" />
         <option value="$PROJECT_DIR$/testing/unittests/activity_test.py" />
         <option value="$PROJECT_DIR$/app/mod_credit/resources/wechat_auth_resource.py" />
@@ -244,7 +293,6 @@
         <option value="$PROJECT_DIR$/app/mod_interaction/resources/CollectorResource.py" />
         <option value="$PROJECT_DIR$/app/mod_interaction/resources/SyllabusCollectionResource.py" />
         <option value="$PROJECT_DIR$/oauth2_test.py" />
-        <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/mod_credit/resources/oauth2_token_resource.py" />
         <option value="$PROJECT_DIR$/app/mod_credit/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -263,6 +311,9 @@
         <option value="$PROJECT_DIR$/app/mod_interaction/database_operations/post_sort_operation.py" />
         <option value="$PROJECT_DIR$/app/mod_interaction/database_operations/anonymous_operation.py" />
         <option value="$PROJECT_DIR$/app/mod_extension/database_operations/eva_operation.py" />
+        <option value="$PROJECT_DIR$/app/mod_mystu/1.py" />
+        <option value="$PROJECT_DIR$/app/views.py" />
+        <option value="$PROJECT_DIR$/app/mod_mystu/mystu.py" />
       </list>
     </option>
   </component>
@@ -273,10 +324,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="107" />
-    <option name="y" value="147" />
-    <option name="width" value="1779" />
-    <option name="height" value="824" />
+    <option name="x" value="320" />
+    <option name="y" value="37" />
+    <option name="width" value="1260" />
+    <option name="height" value="930" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -323,6 +374,12 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="mod_extension" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="syllabus_backend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="new_syllabus" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="mod_mystu" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -450,7 +507,7 @@
       <option name="ADDITIONAL_ARGS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="CollectorResource" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="syllabus_backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -458,12 +515,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/mod_interaction/resources" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/mod_mystu" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/mod_interaction/resources/CollectorResource.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/mod_mystu/1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -494,7 +551,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="oauth2_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="mystu" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="syllabus_backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -502,12 +559,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app/mod_mystu" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/oauth2_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/mod_mystu/mystu.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -569,7 +626,7 @@
       <pass-parent-envs>true</pass-parent-envs>
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in test_anonymous.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in F:/desktop/new_syllabus/testing/test_anonymous.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="largeApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -652,18 +709,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.run" />
-      <item itemvalue="Python.CollectorResource" />
-      <item itemvalue="Python.oauth2_test" />
-      <item itemvalue="Python tests.Unittests in test_anonymous.py" />
+      <item itemvalue="Python tests.Unittests in F:/desktop/new_syllabus/testing/test_anonymous.py" />
       <item itemvalue="Python.test_anonymous" />
+      <item itemvalue="Python.1" />
+      <item itemvalue="Python.mystu" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.run" />
+        <item itemvalue="Python.mystu" />
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.test_anonymous" />
-        <item itemvalue="Python tests.Unittests in test_anonymous.py" />
-        <item itemvalue="Python.oauth2_test" />
-        <item itemvalue="Python.CollectorResource" />
+        <item itemvalue="Python tests.Unittests in F:/desktop/new_syllabus/testing/test_anonymous.py" />
       </list>
     </recent_temporary>
   </component>
@@ -707,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1542905093544</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update post sort by latest days">
+      <created>1542941064975</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1542941064975</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -720,27 +784,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="87" y="119" width="1422" height="658" extended-state="1" />
+    <frame x="564" y="114" width="1007" height="743" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2404692" />
-      <window_info id="Structure" order="1" weight="0.24978831" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.1727672" />
+      <window_info id="Favorites" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3254565" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49786553" weight="0.19760479" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
-      <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.98802394" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.34710744" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50213444" side_tool="true" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3272727" />
-      <window_info anchor="bottom" id="REST Client" order="13" weight="0.32916668" />
-      <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="15" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32423207" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.3289256" />
+      <window_info anchor="bottom" id="Application Servers" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.9878893" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.34602076" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50213444" side_tool="true" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.3272727" />
+      <window_info anchor="bottom" id="REST Client" order="12" weight="0.32916668" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="15" sideWeight="0.49786553" weight="0.3668942" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -748,6 +811,7 @@
       <window_info anchor="right" id="Data View" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
       <window_info anchor="right" id="Mongo Explorer" order="6" />
+      <window_info anchor="right" x="559" y="230" width="341" height="350" id="Structure" order="7" weight="0.24963397" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20727581" />
@@ -837,20 +901,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update post sort by latest days" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/mod_interaction/resources/SyllabusCollectionResource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="95" column="86" selection-start-line="95" selection-start-column="86" selection-end-line="95" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notice/make_notice.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1045,15 +1095,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="e#17039#18286#0" />
-          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3024" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/mod_credit/resources/oa_resource.py">
@@ -1074,9 +1116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="107">
           <caret line="30" column="24" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="24" />
-          <folding>
-            <element signature="e#40#93#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,9 +1123,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="79" />
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1094,9 +1130,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="17" column="43" lean-forward="true" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1111,9 +1144,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#1888#2942#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1124,15 +1154,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/mod_extension/resources/EvaResource.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/mod_extension/database_operations/eva_operation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="86" selection-start-line="86" selection-end-line="91" selection-end-column="33" />
+        <state relative-caret-position="1554">
+          <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mod_extension/resources/EvaResource.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mod_mystu/1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mod_mystu/mystu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="254" column="64" selection-start-line="254" selection-start-column="64" selection-end-line="254" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#1431#1574#0" />
+            <element signature="e#1619#1641#0" />
+            <element signature="e#1677#1696#0" />
+            <element signature="e#1775#2231#0" />
+            <element signature="e#2284#3261#0" />
+            <element signature="e#3310#3540#0" />
+            <element signature="e#3580#3603#0" />
+            <element signature="e#3671#4492#0" />
+            <element signature="e#4590#6998#0" />
+            <element signature="e#7758#8861#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="159" column="40" lean-forward="true" selection-start-line="159" selection-start-column="27" selection-end-line="159" selection-end-column="40" />
+          <folding>
+            <element signature="e#3583#4009#0" />
+            <element signature="e#5305#5823#0" />
+          </folding>
         </state>
       </provider>
     </entry>
