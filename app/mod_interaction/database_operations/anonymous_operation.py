@@ -12,8 +12,8 @@ from app.models import Comment, Post, ThumbUp, User, VISIBILITY_INVISIBLE, VISIB
 
 def anonymous_query(arg_dict):
     print(arg_dict)
+    topic_id = arg_dict['topic_id'] if arg_dict['topic_id'] is not None else -1
     mode = arg_dict['mode'] or 1
-    topic_id = arg_dict['topic_id'] or -1
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
     latest_days = arg_dict['latest_days'] or 3
@@ -77,7 +77,7 @@ def anonymous_query(arg_dict):
 def personal_anonymous_query(arg_dict):
     print(arg_dict)
     uid = arg_dict['uid']
-    topic_id = arg_dict['topic_id'] or -1
+    topic_id = arg_dict['topic_id'] if arg_dict['topic_id'] is not None else -1
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
 

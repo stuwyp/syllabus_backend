@@ -27,17 +27,11 @@ def get_todo_by_page(uid, mode=1, page_index=1, page_size=10):
     total = len(todo_obj.all())
 
     if mode == 1:
-        todo_list = todo_obj.order_by(models.ToDo.release_time.asc()).paginate(page_index,
-                                                                               page_size,
-                                                                               False)
+        todo_list = todo_obj.order_by(models.ToDo.release_time.desc()).paginate(page_index, page_size,False)
     elif mode == 2:
-        todo_list = todo_obj.order_by(models.ToDo.start_time.asc()).paginate(
-            page_index,
-            page_size, False)
+        todo_list = todo_obj.order_by(models.ToDo.start_time.desc()).paginate(page_index, page_size, False)
     else:
-        todo_list = todo_obj.order_by(models.ToDo.deadline_time.asc()).paginate(page_index,
-                                                                                page_size,
-                                                                                False)
+        todo_list = todo_obj.order_by(models.ToDo.deadline_time.desc()).paginate(page_index,page_size,False)
 
     ret = []
 
@@ -46,7 +40,7 @@ def get_todo_by_page(uid, mode=1, page_index=1, page_size=10):
         for i in todo_list.items:
             ret.append(i.to_dict())
 
-    data = {'eva_list': ret}
+    data = {'todo_list': ret}
     pagination = {'limit': len(ret), 'total': total}
     return True, {'data': data, 'pagination': pagination}
 

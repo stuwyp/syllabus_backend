@@ -68,9 +68,9 @@ def get_personal_eva_by_uid(uid, mode=1, page_index=1, page_size=10):
     eva_obj = Evaluation.query.filter_by(uid=uid)
     total = len(eva_obj.all())
     if mode == 1:
-        eva_list = eva_obj.order_by(Evaluation.eva_time.asc()).paginate(page_index, page_size, False)
+        eva_list = eva_obj.order_by(Evaluation.eva_time.desc).paginate(page_index, page_size, False)
     else:
-        eva_list = eva_obj.order_by(Evaluation.eva_score.asc()).paginate(page_index, page_size, False)
+        eva_list = eva_obj.order_by(Evaluation.eva_score.desc).paginate(page_index, page_size, False)
 
     ret = []
     if eva_list:
@@ -98,7 +98,7 @@ def get_class_eva(teacher_id, course_id, class_id, mode=1, term=1, page_index=1,
             stu_class = get_class_by_class_id(class_id)
             years_semester = stu_class.years + "-" + str(stu_class.semester)
             eva_list = eva_obj.filter_by(eva_years_semester=years_semester).order_by(
-                Evaluation.eva_time.asc()).paginate(page_index, page_size, False)
+                Evaluation.eva_time.desc()).paginate(page_index, page_size, False)
     elif mode == 2:
         eva_obj = Evaluation.query.filter_by(teacher_course=tc_id)
         if term == -1:

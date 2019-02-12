@@ -8,8 +8,8 @@ from app.mod_interaction.database_operations.post_sort_operation import get_post
 
 def post_query_sort(arg_dict):
     # print(arg_dict)
+    topic_id = arg_dict['topic_id'] if arg_dict['topic_id'] is not None else -1
     mode = arg_dict['mode'] or 1
-    topic_id = arg_dict['topic_id'] or -1
     latest_days = arg_dict['latest_days'] or 3
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
@@ -20,7 +20,7 @@ def post_query_sort(arg_dict):
 
 def personal_post_query(arg_dict):
     # print(arg_dict)
-    topic_id = arg_dict['topic_id'] or -1
+    topic_id = arg_dict['topic_id'] if arg_dict['topic_id'] is not None else -1
     page_index = arg_dict['page_index'] or 1
     page_size = arg_dict['page_size'] or 10
 

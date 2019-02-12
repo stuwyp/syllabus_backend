@@ -47,8 +47,8 @@ class Mystu(object):
 
     # 返回一个登陆成功后的Response
     def toLoginWithCookies(self, cookies):
-
-        print('exist')
+        # print(cookies)
+        # print('exist')
         session = requests.Session()
 
         session.cookies = requests.utils.cookiejar_from_dict(cookies, cookiejar=None, overwrite=True)
@@ -186,7 +186,7 @@ def get_courses(cookies, start_year, end_year, semester):
                                 'courseName': course[1],
                             })
 
-            return {'courseNum': counter, 'courses': allCourses},200
+            return {'courseNum': counter, 'courses': allCourses}, 200
         else:
             return {'message': 'your cookies of account is wrong'}, 401
     except Exception as e:
@@ -210,6 +210,7 @@ def get_courses(cookies, start_year, end_year, semester):
 
 def get_files(course_linkid, cookies):
     try:
+        t0 = time.time()
         courseFiles = []
         course_url = 'https://my.stu.edu.cn/courses/campus/course/view.php'
         fileUrl = "https://my.stu.edu.cn/courses/campus/mod/resource/view.php?id="
@@ -219,9 +220,15 @@ def get_files(course_linkid, cookies):
             'Cookie': cookies
         }
 
-        resp = requests.get(course_url, headers=header, params={'id': course_linkid}, timeout=1.5)
+        resp = requests.get(course_url, headers=header, params={'id': course_linkid}, timeout=2)
+
         if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in resp.text:
-            return {'message': 'your cookies of account is wrong'}, 401
+            response = requests.get(coursesUrl, headers=header, timeout=2)
+            if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in response.text:
+                return {'message': 'your cookies of account is wrong'}, 401
+            else:
+                return {'message': 'your linkId of course is wrong'}, 400
+
         if not '找不到数据记录' in resp.text and not '此课程现在不可自助选课' in resp.text:
 
             position1 = resp.text.find('"region-main"')
@@ -229,6 +236,7 @@ def get_files(course_linkid, cookies):
             content2_file = resp.text[position1:position2]
 
             items = re.findall(pattern_file_rescource, content2_file)
+
             for item in items:
                 fileId = re.findall(pattern_file_linkid, item[0])[0]
                 courseFiles.append(
@@ -239,20 +247,23 @@ def get_files(course_linkid, cookies):
                         'fileName': item[2]
                     }
                 )
-            folder_link_list = re.findall(pattern_folder, content2_file)
+
+            # folder_link_list = re.findall(pattern_folder, content2_file)
+            soup = BeautifulSoup(content2_file, 'lxml')
+            folder_link_list = soup.find_all('li', attrs={'class': 'activity folder modtype_folder '})
             folder = []
 
             for item in folder_link_list:
-                print(item)
+                new_item = re.findall(pattern_folder, str(item))[0]
                 folder.append(
                     {
-                        'folderLinkId': item[1],
-                        'folderLink': folderUrl + '?id=' + item[1],
-                        'folderName': item[2]
+                        'folderLinkId': new_item[1],
+                        'folderLink': folderUrl + '?id=' + new_item[1],
+                        'folderName': new_item[2]
                     }
                 )
 
-            return {'files': courseFiles, 'folders': folder},200
+            return {'files': courseFiles, 'folders': folder}, 200
         else:
             return {'message': 'your linkId of course is wrong'}, 400
     except Exception as e:
@@ -269,12 +280,17 @@ def get_assigns_link(course_linkid, cookies):
             'Cookie': cookies
         }
 
-        html = requests.get(course_url, headers=header, params={'id': course_linkid}, timeout=1.5).text
+        html = requests.get(course_url, headers=header, params={'id': course_linkid}, timeout=2).text
         if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in html:
-            return {'message': 'your cookies of account is wrong'}, 401
+            response = requests.get(coursesUrl, headers=header, timeout=2)
+            if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in response.text:
+                return {'message': 'your cookies of account is wrong'}, 401
+            else:
+                return {'message': 'your linkId of course is wrong'}, 400
         t1 = time.time()
         print(t1 - t0)
         assignslink = []
+
         if not '找不到数据记录' in html and not '此课程现在不可自助选课' in html:
             soup = BeautifulSoup(html, 'lxml')
 
@@ -302,37 +318,56 @@ def get_assigns_link(course_linkid, cookies):
             # print(assign)
             t1 = time.time()
             print(t1 - t0)
-            return {'num': count, 'assigns': assignslink},200
+            return {'num': count, 'assigns': assignslink}, 200
         else:
-            return None,200
+            return {'message': 'your linkId of course is wrong'}, 400
     except Exception as e:
         print(repr(e))
         return {'error': 'Internal Server Error'}, 500
 
 
-def get_assignment(assign_link, cookies):
+def get_assignment(assign_linkid, cookies):
     try:
         # assigns = get_assign_link(linkid, cookies)
         # print(linkid)
         assign_url = 'https://my.stu.edu.cn/courses/campus/mod/assign/view.php'
+        assignment_url = 'https://my.stu.edu.cn/courses/campus/mod/assignment/view.php'
         header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
             'Cookie': cookies
         }
         # print(assign_url)
-        html = requests.get(assign_url, headers=header, params={'id': assign_link}, timeout=1.5).text
+        html = requests.get(assign_url, headers=header, params={'id': assign_linkid}, timeout=1.5).text
         if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in html:
             return {'message': 'your cookies of account is wrong'}, 401
-        status = {}
-        soup = BeautifulSoup(html, 'lxml')
-        find_assign = soup.find('div', attrs={'class': 'no-overflow'})
-        if find_assign:
-            assignText = find_assign.get_text()
-        else:
-            assignText = None
+        elif '错误的更多信息' not in html:
+            status = {}
+            soup = BeautifulSoup(html, 'lxml')
+            find_assign = soup.find('div', attrs={'class': 'no-overflow'})
+            if find_assign:
+                assignText = find_assign.get_text()
+            else:
+                assignText = None
 
-        status.update({'assign': assignText})
-        contents = soup.find_all('div', attrs={'id': 'dates'})
+            status.update({'assign': assignText})
+            contents = soup.find_all('div', attrs={'id': 'dates'})
+        else:
+            html_ = requests.get(assignment_url, headers=header, params={'id': assign_linkid}, timeout=1.5).text
+            if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in html_:
+                return {'message': 'your cookies of account is wrong'}, 401
+            elif '错误的更多信息' not in html_:
+                status = {}
+                soup = BeautifulSoup(html_, 'lxml')
+                find_assign = soup.find('div', attrs={'class': 'no-overflow'})
+                if find_assign:
+                    assignText = find_assign.get_text()
+                else:
+                    assignText = None
+
+                status.update({'assign': assignText})
+                contents = soup.find_all('div', attrs={'id': 'dates'})
+            else:
+                return {'message': "assign_linkid forbidden"}, 403
 
         if contents:
 
@@ -347,24 +382,46 @@ def get_assignment(assign_link, cookies):
                     status.update({'endTime': tr[6:]})
                 else:
                     status.update({'time': tr})
-
         else:
-            contents = soup.find_all('table', attrs={'class': 'generaltable'})
+            contents = soup.find_all('div', attrs={'class': 'submissionstatustable'})
+            # print(str(contents))
             if contents:
                 soup2 = BeautifulSoup(str(contents), 'lxml')
-                find_tr = soup2.find_all('tr', )
+                find_tr = soup2.find_all('tr')
+                status.update({'beginTime': None})
+                status.update({'endTime': None})
+                status.update({'submitStatus': None})
+                status.update({'gradeStatus': None})
                 for tr in find_tr:
 
                     tr = tr.text.strip('\n')
-
-                    status.update({'beginTime': None})
+                    # print(tr)
                     if '截止时间' in tr:
                         status.update({'endTime': tr[5:]})
+                        continue
+
                     if '提交状态' in tr:
                         status.update({'submitStatus': tr[5:]})
+                        continue
+
                     if '评分状态' in tr:
                         status.update({'gradeStatus': tr[5:]})
-        return status,200
+                        continue
+                find_feedback = soup.find_all('div', attrs={'class': 'feedback'})
+                # print(find_feedback)
+                if find_feedback:
+                    soup2 = BeautifulSoup(str(find_feedback), 'lxml')
+                    find_tr = soup2.find_all('tr')
+                    for tr in find_tr:
+                        tr = tr.text.strip('\n')
+                        if '成绩' in tr:
+                            grade = tr[3:].split('/')[0].strip()
+                            status.update({'grade': grade})
+                            status.pop('gradeStatus')
+                            break
+                        else:
+                            status.update({'grade': None})
+        return status, 200
     except Exception as e:
         print(repr(e))
         return {'error': 'Internal Server Error'}, 500
@@ -381,6 +438,7 @@ def get_folder_files(folder_id, cookies):
         resp = requests.get(folderUrl, headers=header, params={'id': folder_id}, timeout=1.5)
         if "MYSTU/校内办公系统/学分制/网上报修/预约系统" in resp.text:
             return {'message': 'your cookies of account is wrong'}, 401
+        # print(resp.text)
         # t1 = time.time()
         # print(t1 - t0)
         if not '找不到数据记录' in resp.text and not '此课程现在不可自助选课' in resp.text:
@@ -391,20 +449,19 @@ def get_folder_files(folder_id, cookies):
 
             for item in a_list:
                 counter += 1
-                i = re.findall(pattern_folder_file, str(item))[0]
-                # print(i)
+                new_item = re.findall(pattern_folder_file, str(item))[0]
                 courseFiles.append(
                     {
-                        'fileLink': i[0],
-                        'fileKind': i[1],
-                        'fileName': i[2]
+                        'fileLink': new_item[0],
+                        'fileKind': new_item[1],
+                        'fileName': new_item[2]
                     }
                 )
             t1 = time.time()
             print(t1 - t0)
-            return {'fileNum': counter, 'files': courseFiles},200
+            return {'fileNum': counter, 'files': courseFiles}, 200
         else:
-            return {'message': 'your linkId of course is wrong'}, 400
+            return {'message': 'your linkId of folder is wrong'}, 400
     except Exception as e:
         print(repr(e))
         return {'error': 'Internal Server Error'}, 500
@@ -425,3 +482,8 @@ def transferTerm(term):
         year = item
     year = str(year) + '-' + str(year + 1)
     return year, semester
+
+
+if __name__ == '__main__':
+    pass
+    # res = get_files(12790,'CASTGC=TGT-107846-leBnI3kPAnWMa2ZazEAvObJtjb7MfCpapjdmmHJtZFmkdPresb-cas51;MoodleSession=te5m7djsbtbin0kd28ctvqa4q2;_UT_=9107AF284ADC11E6B11A0050568C74A4|29e1ff29-4c0c-4ca4-9830-7fa01f130aca;JSESSIONID=773EBDBAF4A;username=16ypwang;')

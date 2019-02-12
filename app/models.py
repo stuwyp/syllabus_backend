@@ -851,8 +851,6 @@ class FindLost(db.Model):
 
     location = db.Column(db.String(50), nullable=False)
 
-    find_lost_time = db.Column(db.TIMESTAMP)
-
     description = db.Column(db.String(140), nullable=False)
 
     contact = db.Column(db.String(30), nullable=False)
@@ -863,10 +861,9 @@ class FindLost(db.Model):
 
     status = db.Column(db.Boolean, server_default=text('False'))
 
-    def __init__(self, title, location, find_lost_time, description, contact, img_link, kind):
+    def __init__(self, title, location, description, contact, img_link, kind):
         self.title = title
         self.location = location
-        self.find_lost_time = find_lost_time
         self.description = description
         self.contact = contact
         self.img_link = img_link
@@ -879,7 +876,6 @@ class FindLost(db.Model):
             'release_time': self.release_time.strftime("%Y-%m-%d %H:%M:%S"),
             'title': self.title,
             'location': self.location,
-            'find_lost_time': self.find_lost_time.strftime("%Y-%m-%d %H:%M:%S"),
             'description': self.description,
             'contact': self.contact,
             'img_link': self.img_link,
