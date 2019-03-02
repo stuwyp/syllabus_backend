@@ -11,12 +11,18 @@ from app.models import User
 import requests
 import requests.exceptions
 
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+}
+
 parser = reqparse.RequestParser(trim=True)
 
 parser.add_argument("username", required=True, location="form")
 parser.add_argument("password", required=True, location="form")
 parser.add_argument("years", required=True, location="form")
 parser.add_argument("semester", required=True, location="form")
+parser.add_argument('Cookie', location='headers')
+
 
 def new_or_update_user(account, token):
     """
@@ -44,8 +50,8 @@ def new_or_update_user(account, token):
     else:
         return user
 
-class SyllabusResource(Resource):
 
+class SyllabusResource(Resource):
     SYLLABUS_API_URL = "http://127.0.0.1:8080/syllabus"
 
     def get(self):
@@ -53,10 +59,12 @@ class SyllabusResource(Resource):
 
     def post(self):
         args = parser.parse_args()
+        if args['Cookie'] is not None:
+            HEADERS['Cookie'] = args['Cookie']
+            args.pop('Cookie')
         try:
-            r = requests.post(SyllabusResource.SYLLABUS_API_URL,
-                                 data=args)
-            result = r.json()
+            resp = requests.post(SyllabusResource.SYLLABUS_API_URL, headers=HEADERS, data=args)
+            result = resp.json()
             if "token" in result:
                 ret = new_or_update_user(args["username"], result["token"])
                 if ret != False:
@@ -70,7 +78,7 @@ class SyllabusResource(Resource):
                 # 表明出错了
                 return result, 500
 
-            return result
+            return result, 200, {'Cookie': resp.headers['Cookie']}
         except requests.exceptions.ConnectionError:
             # 校内服务器错误
             return {"error": "connection refused"}, 521
