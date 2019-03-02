@@ -468,7 +468,7 @@ class STUTeacher(db.Model):
     gender = db.Column(db.Boolean)
 
     # 老师简介
-    introduction = db.Column(db.String(500))
+    introduction = db.Column(db.TEXT)
 
     # 老师所属单位
     department = db.Column(db.String(100), nullable=False)
@@ -794,7 +794,7 @@ class ToDo(db.Model):
     status = db.Column(db.Boolean, server_default=text('False'))
 
     # 图片链接
-    img_link = db.Column(db.String(500))
+    img_link = db.Column(db.TEXT)
 
     def __init__(self, label, title, content, start_time, deadline_time, priority, status, img_link=None):
         self.label = label
@@ -855,7 +855,7 @@ class FindLost(db.Model):
 
     contact = db.Column(db.String(30), nullable=False)
 
-    img_link = db.Column(db.String(500))
+    img_link = db.Column(db.TEXT)
 
     kind = db.Column(db.Integer, nullable=False)
 

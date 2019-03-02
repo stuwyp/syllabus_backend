@@ -13,6 +13,7 @@ testing/
 app/mod_hello_blueprint/
 
 # config file
+/app/config.txt
 config.conf
 
 # testing stuff

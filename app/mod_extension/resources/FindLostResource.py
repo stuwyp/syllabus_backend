@@ -69,7 +69,7 @@ class FindLostResource(Resource):
                 # uid, title, location, description, contact, img_link, kind)
                 ret = findlost_add(args['uid'], args['title'], args['location'],
                                    args['description'], args['contact'], args['img_link'], args['kind'])
-                print(ret)
+                # print(ret)
                 if ret[0]:
                     return {"status": "created", 'id': ret[1]}, 200
                 else:
@@ -106,8 +106,6 @@ class FindLostResource(Resource):
         if general_operation.check_token(args):
             print(args)
             try:
-                print("-----------------------------------------------------------------")
-
                 ret = findlost_update(args['uid'], args['findlost_id'], args['title'], args['location'],
                                       args['description'], args['contact'], args.get('img_link', ''), args['kind'])
                 if ret[0]:
