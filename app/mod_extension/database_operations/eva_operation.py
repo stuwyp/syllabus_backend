@@ -67,11 +67,13 @@ def get_personal_eva_by_uid(uid, mode=1, page_index=1, page_size=10):
         return False, "user doesn't exist"
     eva_obj = Evaluation.query.filter_by(uid=uid)
     total = len(eva_obj.all())
-    if mode == 1:
-        eva_list = eva_obj.order_by(Evaluation.eva_time.desc).paginate(page_index, page_size, False)
-    else:
-        eva_list = eva_obj.order_by(Evaluation.eva_score.desc).paginate(page_index, page_size, False)
-
+    try:
+        if mode == 1:
+            eva_list = eva_obj.order_by(Evaluation.eva_time.desc()).paginate(page_index, page_size, False)
+        else:
+            eva_list = eva_obj.order_by(Evaluation.eva_score.desc()).paginate(page_index, page_size, False)
+    except Exception as e:
+        print("-----------------\n",repr(e))
     ret = []
     if eva_list:
         for i in eva_list.items:

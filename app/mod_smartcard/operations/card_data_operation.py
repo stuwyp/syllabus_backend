@@ -14,7 +14,7 @@ CARD_DETAIL_URL = 'http://wechat.stu.edu.cn/wechat/smartcard/smartcard_trans_det
 
 def get_card_balance(cookie):
     html = requests.get(CARD_BALANCE_URL, cookies=cookie).text
-    pattern = re.compile('.*?一卡通余额是(\d{1,}\.\d{2})元')
+    pattern = re.compile('.*?一卡通余额是(\d{1,}\.\d{1,2})元')
     balance_ret = re.findall(pattern, html)
     if len(balance_ret) > 0:
         balance = balance_ret[0]

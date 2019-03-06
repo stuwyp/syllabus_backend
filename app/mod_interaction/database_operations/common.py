@@ -224,21 +224,25 @@ def get_latest_id(model):
         return model.query.with_entities(model.id).order_by(model.id.desc()).limit(1).first()
 
 def new_record(db, model, **kwargs):
-    # print(kwargs)
-    thing = model(**kwargs)
-    result = add_to_db(db, thing)
+    try:
+        # print(kwargs)
+        thing = model(**kwargs)
+        result = add_to_db(db, thing)
 
-    if result == True:
-        if issubclass(model, Comment):
-            print("generating unread messages")
-            if new_unread(kwargs["post_id"], kwargs["uid"]):
-                print("succeed to generate unread messages")
-            else:
-                print("fail to generate unread messages")
+        if result == True:
+            if issubclass(model, Comment):
+                print("generating unread messages")
+                if new_unread(kwargs["post_id"], kwargs["uid"]):
+                    print("succeed to generate unread messages")
+                else:
+                    print("fail to generate unread messages")
 
-        return get_last_inserted_id(model)
-    else:
-        return False
+            return get_last_inserted_id(model)
+        else:
+            return False
+    except Exception as e:
+        print(repr(e))
+        return  False
 
 def delete_from_db(db, model, id, uid):
     """
