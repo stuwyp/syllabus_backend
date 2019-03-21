@@ -1,4 +1,6 @@
 # coding=utf-8
+import traceback
+
 __author__ = 'smallfly'
 
 from flask_restful import Resource
@@ -64,7 +66,7 @@ def auth(username, password):
             else:
                 return status
     except requests.RequestException as e:
-        print(e)
+        print(traceback.print_exc())
         status["code"] = CODE_INTERNET_ERROR
         status["message"] = "INTERNET FAILED"
         return status

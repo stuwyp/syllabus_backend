@@ -1,4 +1,6 @@
 # coding=utf-8
+from pprint import pprint
+
 __author__ = 'smallfly'
 
 # 转发到学校服务器进行课表查询
@@ -59,7 +61,7 @@ class SyllabusResource(Resource):
 
     def post(self):
         args = parser.parse_args()
-        if args['Cookie'] is not None:
+        if args.get('Cookie',None) is not None:
             HEADERS['Cookie'] = args['Cookie']
             args.pop('Cookie')
         try:
@@ -76,9 +78,11 @@ class SyllabusResource(Resource):
                     result["level"] = ret.level
             elif "ERROR" in result:
                 # 表明出错了
-                return result, 500
-
-            return result, 200, {'Cookie': resp.headers['Cookie']}
+                return result, resp.status_code
+            if 'Cookie' in resp.headers.keys():
+                return result, 200, {'Cookie': resp.headers['Cookie']}
+            else:
+                return result, 200
         except requests.exceptions.ConnectionError:
             # 校内服务器错误
             return {"error": "connection refused"}, 521
