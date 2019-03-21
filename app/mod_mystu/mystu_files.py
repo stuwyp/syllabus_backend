@@ -1,5 +1,6 @@
 import re
 import time
+import traceback
 
 import requests
 from bs4 import BeautifulSoup
@@ -21,7 +22,7 @@ def get_files(course_linkid, cookies):
         t0 = time.time()
         courseFiles = []
         course_url = 'https://my.stu.edu.cn/courses/campus/course/view.php?id='
-        fileUrl = "https://my.stu.edu.cn/courses/campus/mod/resources/view.php?id="
+        fileUrl = "https://my.stu.edu.cn/courses/campus/mod/resource/view.php?id="
 
         header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
@@ -75,7 +76,7 @@ def get_files(course_linkid, cookies):
         else:
             return {'error': 'linkId of course is wrong'}, 400
     except Exception as e:
-        print(repr(e))
+        print(traceback.print_exc())
         return {'error': 'request error'}, 400
 
 
@@ -87,7 +88,7 @@ def get_folder_files(folder_id, cookies):
             'Cookie': cookies
         }
 
-        resp = requests.get(folderUrl, headers=header, params={'id': folder_id}, timeout=1.5)
+        resp = requests.get(folderUrl, headers=header, params={'id': folder_id}, timeout=3)
         if 'MYSTU/校内办公系统/学分制/网上报修/预约系统' in resp.text:
             return {'error': 'cookie expired or wrong cookie'}, 401
         # print(resp.text)
@@ -115,5 +116,5 @@ def get_folder_files(folder_id, cookies):
         else:
             return {'error': 'linkId of folder is wrong'}, 400
     except Exception as e:
-        print(repr(e))
+        print(traceback.print_exc())
         return {'error': 'request error'}, 400

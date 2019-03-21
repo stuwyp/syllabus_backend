@@ -1,4 +1,6 @@
 import time
+import traceback
+
 from flask import Flask
 from http.cookiejar import CookieJar
 import requests
@@ -148,7 +150,7 @@ def get_cookies_after_login(username, password, cookies={}):
         # print(mystu.cookies)
         return {'Cookie': strCookie, 'setCookie': setCookie}, 200, mystu.cookies
     except Exception as e:
-        print(repr(e))
+        print(traceback.print_exc())
         return {'error': 'request error'}, 400
 
 
@@ -172,4 +174,3 @@ def transferTerm(term):
 
 if __name__ == '__main__':
     pass
-    
