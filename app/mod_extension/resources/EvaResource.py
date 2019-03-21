@@ -1,4 +1,5 @@
 # coding=utf-8
+import traceback
 from datetime import datetime
 
 from flask_restful import fields, Resource
@@ -108,7 +109,7 @@ class EvaluationResource(Resource):
                 else:
                     return {"error": ret[1]}, 400
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": "wrong operation"}, 500
 
         return {"error": "unauthorized"}, 401
@@ -213,7 +214,7 @@ class ClassEvaluationResource(Resource):
                 else:
                     return {"error": ret[1]}, 400
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": "wrong operation"}, 500
 
         return {"error": "unauthorized"}, 401

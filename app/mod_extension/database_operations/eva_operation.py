@@ -17,13 +17,13 @@ def insert_eva(uid, class_id, eva_content, eva_tags, eva_score, eva_status, cid,
     user_class = get_class_by_class_id(class_id)
     years_semester = user_class.years + "-" + str(user_class.semester)
 
-    newEva = Evaluation(eva_content, eva_tags, eva_score, eva_status, years_semester)
+    new_eva = Evaluation(eva_content, eva_tags, eva_score, eva_status, years_semester)
 
-    user_class.evaluations.append(newEva)
-    user.evaluations.append(newEva)
-    tc.evaluations.append(newEva)
+    user_class.evaluations.append(new_eva)
+    user.evaluations.append(new_eva)
+    tc.evaluations.append(new_eva)
 
-    return insert_to_database(Evaluation, newEva)
+    return insert_to_database(Evaluation, new_eva)
 
 
 def update_eva(eva_id, eva_content, eva_tags, eva_score, eva_status, eva_time):
@@ -67,13 +67,12 @@ def get_personal_eva_by_uid(uid, mode=1, page_index=1, page_size=10):
         return False, "user doesn't exist"
     eva_obj = Evaluation.query.filter_by(uid=uid)
     total = len(eva_obj.all())
-    try:
-        if mode == 1:
-            eva_list = eva_obj.order_by(Evaluation.eva_time.desc()).paginate(page_index, page_size, False)
-        else:
-            eva_list = eva_obj.order_by(Evaluation.eva_score.desc()).paginate(page_index, page_size, False)
-    except Exception as e:
-        print("-----------------\n",repr(e))
+
+    if mode == 1:
+        eva_list = eva_obj.order_by(Evaluation.eva_time.desc()).paginate(page_index, page_size, False)
+    else:
+        eva_list = eva_obj.order_by(Evaluation.eva_score.desc()).paginate(page_index, page_size, False)
+
     ret = []
     if eva_list:
         for i in eva_list.items:

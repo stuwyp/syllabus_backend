@@ -1,4 +1,5 @@
 # coding=utf-8
+import traceback
 from datetime import datetime
 
 from flask_restful import fields, Resource
@@ -89,7 +90,7 @@ class TodoResource(Resource):
                 else:
                     return {"error": ret[1]}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401

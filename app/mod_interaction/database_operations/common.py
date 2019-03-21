@@ -1,9 +1,11 @@
 # coding=utf-8
+import traceback
+
 __author__ = 'smallfly'
 
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/#querying-records
 
-from app.models import User, VISIBILITY_VISIBLE, VISIBILITY_INVISIBLE, Comment
+from app.models import User, VISIBILITY_VISIBLE, VISIBILITY_INVISIBLE, Comment, Post
 from app.mod_interaction.database_operations.unread_comment_operation import new_unread
 # from config import config
 
@@ -104,11 +106,17 @@ def query_multiple(model, **kwargs):
 
     if not hasattr(model, order_by):
         return False
-
-    if sorting == QUERY_SORT_TYPE_DESC:
-        query = query.order_by(getattr(model, order_by).desc())
+    if model == Post:
+    # wyp 2019/3/11 加入代码，目的是为了不让客户端（Android、IOS）不呈现表白墙
+        if sorting == QUERY_SORT_TYPE_DESC:
+            query = query.filter(getattr(model,'topic_id') != 6).order_by(getattr(model, order_by).desc())
+        else:
+            query = query.filter(getattr(model,'topic_id') != 6).order_by(getattr(model, order_by).asc())
     else:
-        query = query.order_by(getattr(model, order_by).asc())
+        if sorting == QUERY_SORT_TYPE_DESC:
+            query = query.order_by(getattr(model, order_by).desc())
+        else:
+            query = query.order_by(getattr(model, order_by).asc())
 
     query = query.limit(count)
 
@@ -241,7 +249,7 @@ def new_record(db, model, **kwargs):
         else:
             return False
     except Exception as e:
-        print(repr(e))
+        print(traceback.print_exc())
         return  False
 
 def delete_from_db(db, model, id, uid):
@@ -274,7 +282,7 @@ def delete_from_db(db, model, id, uid):
         db.session.commit()
         return True
     except Exception as e:
-        print(e)
+        print(traceback.print_exc())
         db.session.rollback()
         return False, ERROR_COMMIT_FAILED
 

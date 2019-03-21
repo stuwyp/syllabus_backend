@@ -1,4 +1,6 @@
 # coding=utf-8
+import traceback
+
 from flask_restful import Resource
 from flask_restful.reqparse import RequestParser
 
@@ -51,7 +53,7 @@ class PostSortResource(Resource):
                 return ret[1]
             return {"error": ''}, 404
         except Exception as e:
-            print(repr(e))
+            print(traceback.print_exc())
             return {"error": repr(e)}, 500
 
 
@@ -80,7 +82,7 @@ class PersonalPostSortResource(Resource):
                     return ret[1]
                 return {"error": ''}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401

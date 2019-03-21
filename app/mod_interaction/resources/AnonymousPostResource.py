@@ -1,4 +1,6 @@
 # coding=utf-8
+import traceback
+
 from app.mod_extension.database_operations import general_operation
 from app.mod_interaction.database_operations.anonymous_operation import anonymous_query, personal_anonymous_query, \
     anonymous_delete
@@ -60,7 +62,7 @@ class AnonymousResource(Resource):
                     return ret[1],200
                 return {"error": ret[2]}, ret[1]
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401
@@ -83,7 +85,7 @@ class AnonymousResource(Resource):
                 return ret[1],200
             return {"error": ret[1]}, 404
         except Exception as e:
-            print(repr(e))
+            print(traceback.print_exc())
             return {"error": repr(e)}, 500
 
 
@@ -110,7 +112,7 @@ class PersonalAnonymousResource(Resource):
                     return ret[1],200
                 return {"error": ret[1]}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401

@@ -1,4 +1,5 @@
 # coding=utf-8
+import traceback
 
 from flask_restful import fields, Resource, marshal
 from flask_restful.reqparse import RequestParser
@@ -113,7 +114,7 @@ class FindLostResource(Resource):
                 else:
                     return {"error": ret[1]}, ret[2]
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": "wrong operation"}, 500
         else:
             return {"error": "unauthorized"}, 401
@@ -169,7 +170,7 @@ class FindLostResources(Resource):
                 else:
                     return {"error": ret[1]}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401
@@ -202,7 +203,7 @@ class PersonalFindLostResources(Resource):
                 else:
                     return {"error": ret[1]}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401

@@ -1,4 +1,6 @@
 # coding=utf-8
+import traceback
+
 from flask_restful.reqparse import RequestParser
 
 from app.mod_interaction.database_operations.comment_operation import get_personal_comment_by_page
@@ -106,7 +108,7 @@ class PersonalCommentResource(Resource):
                     return ret[1],200
                 return {"error": ret[1]}, 404
             except Exception as e:
-                print(repr(e))
+                print(traceback.print_exc())
                 return {"error": repr(e)}, 500
         else:
             return {"error": "unauthorized"}, 401
